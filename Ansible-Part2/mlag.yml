@@ -1,0 +1,24 @@
+---
+- name: MLAG Left
+  hosts: left
+  gather_facts: no
+  tasks:
+  - name: MLAG Left Template
+    template:
+      src: "{{lookup('env','PWD')}}/templates/mlag-left.j2"
+      dest: "{{lookup('env','PWD')}}/configs/mlag-left.cfg"
+  - name: Upload Config
+    eos_config:
+      src: "{{lookup('env','PWD')}}/configs/mlag-left.cfg"
+
+- name: MLAG Right
+  hosts: right
+  gather_facts: no
+  tasks:
+  - name: MLAG Right Template
+    template:
+      src: "{{lookup('env','PWD')}}/templates/mlag-right.j2"
+      dest: "{{lookup('env','PWD')}}/configs/mlag-right.cfg"
+  - name: Upload Config
+    eos_config:
+      src: "{{lookup('env','PWD')}}/configs/mlag-right.cfg"
