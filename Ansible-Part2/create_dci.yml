@@ -1,0 +1,7 @@
+---
+- hosts: DCI
+  gather_facts: no
+  tasks:
+  - name: Create DCI configuration
+    eos_config:
+      src: dci.cfg
